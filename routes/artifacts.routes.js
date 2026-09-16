@@ -1,13 +1,14 @@
 const router = require('express').Router()
 const Artifact = require('../models/artifact.model')
 
-router.get('/', async (res, req) => {
+router.get('/', async (req,res) => {
   try {
     const artifacts = await Artifact.find()
-    res.render('/artifacts/index.ejs', { artifacts })
+    res.render('artifacts/index.ejs', { artifacts:artifacts })
   } catch (error) {
-    console.log(error)
     res.send('The marketplace could not be opened.')
+    console.log(error)
+    
   }
 })
 
@@ -27,8 +28,8 @@ router.post('/', async (req, res) => {
 
 router.get('/:artifactId', async (req, res) => {
   try {
-    const artifact = await Artifact.findById(req.params.id).populate('reviews')
-    res.render('artifacts/show.html', { artifact })
+    const artifact = await Artifact.findById(req.params.artifactId).populate('reviews')
+    res.render('artifacts/show.ejs', { artifact:artifact })
   } catch (error) {
     console.log(error)
     res.redirect('/artifacts')
@@ -38,7 +39,7 @@ router.get('/:artifactId', async (req, res) => {
 router.get('/:artifactId/edit', async (req, res) => {
   try {
     const artifact = await Artifact.findById(req.params.artifactId)
-    res.render('artifacts/edit.ejs', { artifact })
+    res.render('artifacts/edit.ejs', { artifact : artifact})
   } catch (error) {
     console.log(error)
     res.redirect('/artifacts')
@@ -47,7 +48,7 @@ router.get('/:artifactId/edit', async (req, res) => {
 
 router.put('/:artifactId', async (req, res) => {
   try {
-    await Artifact.findByIdAndDelete(req.params.artifactId, req.body)
+    await Artifact.findByIdAndUpdate(req.params.artifactId, req.body)
     res.redirect(`/artifacts/${req.params.artifactId}`)
   } catch (error) {
     console.log(error)

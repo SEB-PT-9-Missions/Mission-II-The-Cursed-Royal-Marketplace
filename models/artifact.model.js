@@ -38,4 +38,4 @@ const artifactSchema = new mongoose.Schema(
 
 const Artifact = mongoose.model('Artifact', artifactSchema)
 
-module.export = Artifact
+module.exports = Artifact
