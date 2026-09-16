@@ -2,6 +2,7 @@ const router = require('express').Router({ mergeParams: true })
 const Artifact = require('../models/artifact.model')
 const Review = require('../models/review.model')
 
+
 router.post('/', async (req, res) => {
   try {
     const artifact = await Artifact.findById(req.body)
