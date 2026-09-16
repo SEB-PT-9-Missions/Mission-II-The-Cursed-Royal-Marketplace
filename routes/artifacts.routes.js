@@ -2,14 +2,17 @@ const router = require('express').Router()
 const Artifact = require('../models/artifact.model')
 
 router.get('/', async (res, req) => {
-  try {
-    const artifacts = await Artifact.find()
-    res.render('/artifacts/index.ejs', { artifacts })
-  } catch (error) {
-    console.log(error)
-    res.send('The marketplace could not be opened.')
-  }
+    const artifacts = await Artifact.create()
+  res.render('artifacts/new.ejs', {artifacts: artifacts})
 })
+
+  // try {
+  //   const artifacts = await Artifact.find()
+  //   res.render('/artifacts/index.ejs', { artifacts: artifacts })
+  // } catch (error) {
+  //   console.log(error)
+  //   res.send('The marketplace could not be opened.')
+  // }
 
 router.get('/new', (req, res) => {
   res.render('artifacts/new.ejs')

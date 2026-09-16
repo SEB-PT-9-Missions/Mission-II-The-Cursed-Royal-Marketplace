@@ -1,14 +1,17 @@
 const express = require('express')
-const app = express
-require('dotenv').config()
+const app = express()
+const dotenv = require('dotenv').config()
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const methodOverride = require('method-override')
 
-const artifactRoutes = require('./routes/artifacts.routes')
-const reviewRoutes = require('./routes/review.routes')
+const dns = require("dns")
+dns.setServers(["8.8.8.8", "1.1.1.1"])
 
-app.set('view engine', 'ejs')
+const artifactRoutes = require('./routes/artifacts.routes')
+const reviewRoutes = require('./routes/reviews.routes')
+
+// app.set('view engine', 'ejs')
 
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: false }))
@@ -24,7 +27,7 @@ async function connectToDB() {
   }
 }
 
-conntectToDB()
+connectToDB()
 
 app.get('/', (req, res) => {
   res.render('home.ejs')
@@ -33,6 +36,6 @@ app.get('/', (req, res) => {
 app.use('/artifacts', artifactRoutes)
 app.use('/artifacts/:artifactId/reviews', reviewRoutes)
 
-app.listen(PORT, () => {
-  console.log(`⚔️ Royal Server listening on port ${PORT}`)
+app.listen(3000, () => {
+  console.log(`⚔️ Royal Server listening on port ${3000}`)
 })
