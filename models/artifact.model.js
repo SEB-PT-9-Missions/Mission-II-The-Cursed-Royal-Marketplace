@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+// const Artifact = require('../models/artifact')
 
 const artifactSchema = new mongoose.Schema(
   {
@@ -38,4 +39,5 @@ const artifactSchema = new mongoose.Schema(
 
 const Artifact = mongoose.model('Artifact', artifactSchema)
 
-module.export = Artifact
+//fixed the spelling
+module.exports = Artifact

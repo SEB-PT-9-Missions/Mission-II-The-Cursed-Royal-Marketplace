@@ -1,10 +1,14 @@
 const router = require('express').Router()
 const Artifact = require('../models/artifact.model')
+// 6. added the review
+const Review = require('../models/review.model')
 
-router.get('/', async (res, req) => {
+// 5. corrected the req, res
+router.get('/', async (req, res) => {
   try {
     const artifacts = await Artifact.find()
-    res.render('/artifacts/index.ejs', { artifacts })
+    // 
+    res.render('artifacts/index.ejs', { artifacts })
   } catch (error) {
     console.log(error)
     res.send('The marketplace could not be opened.')
@@ -18,7 +22,8 @@ router.get('/new', (req, res) => {
 router.post('/', async (req, res) => {
   try {
     await Artifact.create(req.body)
-    res.redirect('artifacts/index.ejs')
+    // added /
+    res.redirect('/artifacts/index.ejs')
   } catch (error) {
     console.log(error)
     res.redirect('/artifacts/new')
