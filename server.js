@@ -36,6 +36,14 @@ app.get('/', (req, res) => {
 app.use('/artifacts', artifactRoutes)
 app.use('/artifacts/:artifactId/reviews', reviewRoutes)
 
-app.listen(3000, () => {
-  console.log(`⚔️ Royal Server listening on port ${3000}`)
-})
+
+async function startServer() {
+    const PORT = process.env.PORT || 3000;
+    await connectToDB();
+
+    app.listen(PORT, () => {
+        console.log(`⚔️ Royal Server listening on port ${PORT}`);
+    });
+}
+
+startServer();
