@@ -25,7 +25,9 @@ const artifactSchema = new mongoose.Schema(
       enum: ['Common', 'Rare', 'Epic', 'Legendary'],
       default: 'Common',
     },
-    image: String,
+    image: {
+      tyep: String
+    },
     reviews: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -38,4 +40,4 @@ const artifactSchema = new mongoose.Schema(
 
 const Artifact = mongoose.model('Artifact', artifactSchema)
 
-module.export = Artifact
+module.exports = Artifact
